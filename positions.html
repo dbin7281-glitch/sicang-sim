@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>持仓明细 · 司仓模拟盘</title>
+<script>
+// 底部 Tab 高亮: 根据当前文件名点亮
+(function(){
+  var cur = location.pathname.split('/').pop() || 'index.html';
+  var links = document.querySelectorAll('.tabbar a');
+  for (var i=0;i<links.length;i++){
+    if (links[i].getAttribute('href') === cur) links[i].className = 'on';
+  }
+})();
+</script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#F5F6FA; font-family:-apple-system, "PingFang SC", "Helvetica Neue", sans-serif; color:#1A1A2E; }
+  .wrap { max-width:800px; margin:0 auto; padding:0 0 70px; }
+  .header { background:linear-gradient(135deg,#0A1628 0%,#1B2A45 100%); padding:20px 18px 16px; color:#fff; }
+  .brand { font-size:13px; color:#C9A84C; font-weight:600; letter-spacing:1.5px; }
+  .brand b { font-size:16px; }
+  .acct { font-size:10.5px; color:rgba(255,255,255,0.5); margin-top:3px; }
+  .main { padding:14px 14px; }
+  .card { background:#FFFFFF; border:1px solid #E8ECF0; border-radius:10px; margin-bottom:12px; overflow:hidden; box-shadow:0 1px 3px rgba(10,22,40,0.04); }
+  .card-h { padding:12px 16px; font-size:13px; font-weight:700; color:#0A1628; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #E8ECF0; }
+  .card-h .hint { font-size:11px; color:#7A8A9B; font-weight:400; }
+  table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  th { background:#F1F3F7; color:#7A8A9B; font-size:11px; font-weight:600; text-align:right; padding:8px 10px; white-space:nowrap; }
+  th:first-child { text-align:left; }
+  td { padding:9px 10px; border-bottom:1px solid #F2F4F7; text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  td:first-child { text-align:left; }
+  tr:last-child td { border-bottom:none; }
+  .nm { font-weight:600; font-size:13px; }
+  .cd { font-size:10.5px; color:#7A8A9B; margin-top:1px; }
+  .pos { color:#E60012; font-weight:600; }
+  .neg { color:#3FB34D; font-weight:600; }
+  .total-row td { background:#FAFBFD; font-weight:700; font-size:13px; }
+  .foot { text-align:center; padding:12px; font-size:10.5px; color:#7A8A9B; }
+  .tabbar { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #E8ECF0; display:flex; justify-content:space-around; padding:8px 0 calc(8px + env(safe-area-inset-bottom)); box-shadow:0 -2px 8px rgba(10,22,40,0.06); }
+  .tabbar a { text-decoration:none; color:#7A8A9B; font-size:12px; font-weight:600; padding:6px 18px; border-radius:999px; }
+  .tabbar a.on { color:#fff; background:#0A1628; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .kpi { background:#FFFFFF; border:1px solid #E8ECF0; border-radius:10px; padding:12px 8px; text-align:center; }
+  .kpi .v { font-size:17px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .kpi .l { font-size:10px; color:#7A8A9B; margin-top:3px; }
+  .tag { display:inline-block; font-size:10px; padding:1px 7px; border-radius:4px; font-weight:600; }
+  .tag-b { background:rgba(230,0,18,0.1); color:#E60012; }
+  .tag-s { background:rgba(63,179,77,0.1); color:#3FB34D; }
+  .acc-bar { height:4px; border-radius:2px; background:#C9A84C; width:100%; }
+  .note { font-size:11px; color:#7A8A9B; padding:8px 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="brand"><b>司仓</b> · 模拟盘 SICANG SIM</div>
+    <div class="acct">账户 8888 0088 · 初始资金 ¥2,000,000 · </div>
+  </div>
+  <div class="main">
+  <div class="card">
+    <div class="card-h">持仓明细 <span class="hint">数据截至 2026-08-15 11:36 · stock.db 收盘价</span></div>
+    <table>
+      <thead><tr><th>股票</th><th>持仓</th><th>成本价</th><th>现价</th><th>市值</th><th>浮动盈亏</th><th>盈亏比例</th><th>止损价</th><th>目标价</th><th>持仓天数</th></tr></thead>
+      <tbody><tr>
+          <td><div class="nm">工业富联</div><div class="cd">601138.SH · 通信设备</div></td>
+          <td class="num">4,400</td>
+          <td class="num">66.99</td>
+          <td class="num" style="color:#E60012">66.19</td>
+          <td class="num">291,236</td>
+          <td class="num" style="color:#3FB34D">-3,520</td>
+          <td class="num" style="color:#3FB34D">-1.19%</td>
+          <td class="num">60.50</td>
+          <td class="num">80.00</td>
+          <td class="num">3</td>
+        </tr><tr>
+          <td><div class="nm">长江证券</div><div class="cd">000783.SZ · 证券</div></td>
+          <td class="num">22,100</td>
+          <td class="num">8.96</td>
+          <td class="num" style="color:#3FB34D">9.04</td>
+          <td class="num">199,784</td>
+          <td class="num" style="color:#E60012">+1,768</td>
+          <td class="num" style="color:#E60012">+0.89%</td>
+          <td class="num">8.55</td>
+          <td class="num">9.50</td>
+          <td class="num">9</td>
+        </tr><tr>
+          <td><div class="nm">宁德时代</div><div class="cd">300750.SZ · 电气设备</div></td>
+          <td class="num">500</td>
+          <td class="num">394.04</td>
+          <td class="num" style="color:#3FB34D">393.93</td>
+          <td class="num">196,965</td>
+          <td class="num" style="color:#3FB34D">-55</td>
+          <td class="num" style="color:#3FB34D">-0.03%</td>
+          <td class="num">375.00</td>
+          <td class="num">420.00</td>
+          <td class="num">3</td>
+        </tr><tr>
+          <td><div class="nm">珠免集团</div><div class="cd">600185.SH · 旅游服务</div></td>
+          <td class="num">41,400</td>
+          <td class="num">4.82</td>
+          <td class="num" style="color:#3FB34D">4.64</td>
+          <td class="num">192,096</td>
+          <td class="num" style="color:#3FB34D">-7,452</td>
+          <td class="num" style="color:#3FB34D">-3.73%</td>
+          <td class="num">4.50</td>
+          <td class="num">5.20</td>
+          <td class="num">9</td>
+        </tr><tr>
+          <td><div class="nm">顶点软件</div><div class="cd">603383.SH · 软件服务</div></td>
+          <td class="num">6,500</td>
+          <td class="num">30.68</td>
+          <td class="num" style="color:#3FB34D">29.46</td>
+          <td class="num">191,490</td>
+          <td class="num" style="color:#3FB34D">-7,930</td>
+          <td class="num" style="color:#3FB34D">-3.98%</td>
+          <td class="num">28.80</td>
+          <td class="num">32.50</td>
+          <td class="num">9</td>
+        </tr><tr>
+          <td><div class="nm">药明康德</div><div class="cd">603259.SH · 化学制药</div></td>
+          <td class="num">1,200</td>
+          <td class="num">164.25</td>
+          <td class="num" style="color:#3FB34D">159.24</td>
+          <td class="num">191,088</td>
+          <td class="num" style="color:#3FB34D">-6,012</td>
+          <td class="num" style="color:#3FB34D">-3.05%</td>
+          <td class="num">150.00</td>
+          <td class="num">180.00</td>
+          <td class="num">3</td>
+        </tr><tr>
+          <td><div class="nm">特宝生物</div><div class="cd">688278.SH · 生物制药</div></td>
+          <td class="num">2,400</td>
+          <td class="num">60.75</td>
+          <td class="num" style="color:#3FB34D">60.80</td>
+          <td class="num">145,920</td>
+          <td class="num" style="color:#E60012">+120</td>
+          <td class="num" style="color:#E60012">+0.08%</td>
+          <td class="num">56.00</td>
+          <td class="num">68.00</td>
+          <td class="num">3</td>
+        </tr><tr>
+          <td><div class="nm">常熟银行</div><div class="cd">601128.SH · 银行</div></td>
+          <td class="num">15,600</td>
+          <td class="num">6.09</td>
+          <td class="num" style="color:#3FB34D">6.09</td>
+          <td class="num">95,004</td>
+          <td class="num" style="color:#7A8A9B">+0</td>
+          <td class="num" style="color:#7A8A9B">+0.00%</td>
+          <td class="num">6.00</td>
+          <td class="num">7.20</td>
+          <td class="num">3</td>
+        </tr><tr>
+          <td><div class="nm">冠农股份</div><div class="cd">600251.SH · 农业综合</div></td>
+          <td class="num">9,100</td>
+          <td class="num">9.72</td>
+          <td class="num" style="color:#E60012">9.76</td>
+          <td class="num">88,816</td>
+          <td class="num" style="color:#E60012">+364</td>
+          <td class="num" style="color:#E60012">+0.41%</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">2</td>
+        </tr><tr>
+          <td><div class="nm">北化股份</div><div class="cd">002246.SZ · 化工原料</div></td>
+          <td class="num">4,200</td>
+          <td class="num">22.47</td>
+          <td class="num" style="color:#3FB34D">21.07</td>
+          <td class="num">88,494</td>
+          <td class="num" style="color:#3FB34D">-5,880</td>
+          <td class="num" style="color:#3FB34D">-6.23%</td>
+          <td class="num">20.00</td>
+          <td class="num">26.50</td>
+          <td class="num">3</td>
+        </tr><tr>
+          <td><div class="nm">惠天热电</div><div class="cd">000692.SZ · 供气供热</div></td>
+          <td class="num">18,100</td>
+          <td class="num">4.88</td>
+          <td class="num" style="color:#3FB34D">4.58</td>
+          <td class="num">82,898</td>
+          <td class="num" style="color:#3FB34D">-5,430</td>
+          <td class="num" style="color:#3FB34D">-6.15%</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">2</td>
+        </tr><tr>
+          <td><div class="nm">丽江股份</div><div class="cd">002033.SZ · 旅游景点</div></td>
+          <td class="num">4,300</td>
+          <td class="num">8.74</td>
+          <td class="num" style="color:#E60012">8.96</td>
+          <td class="num">38,528</td>
+          <td class="num" style="color:#E60012">+946</td>
+          <td class="num" style="color:#E60012">+2.52%</td>
+          <td class="num">8.40</td>
+          <td class="num">10.00</td>
+          <td class="num">3</td>
+        </tr><tr>
+          <td><div class="nm">恒丰纸业</div><div class="cd">600356.SH · 造纸</div></td>
+          <td class="num">4,200</td>
+          <td class="num">8.94</td>
+          <td class="num" style="color:#E60012">8.81</td>
+          <td class="num">37,002</td>
+          <td class="num" style="color:#3FB34D">-546</td>
+          <td class="num" style="color:#3FB34D">-1.45%</td>
+          <td class="num">8.00</td>
+          <td class="num">10.50</td>
+          <td class="num">3</td>
+        </tr><tr>
+          <td><div class="nm">财通证券</div><div class="cd">601108.SH · 证券</div></td>
+          <td class="num">4,000</td>
+          <td class="num">8.83</td>
+          <td class="num" style="color:#3FB34D">8.83</td>
+          <td class="num">35,320</td>
+          <td class="num" style="color:#7A8A9B">+0</td>
+          <td class="num" style="color:#7A8A9B">+0.00%</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">1</td>
+        </tr><tr>
+          <td><div class="nm">三鑫医疗</div><div class="cd">300453.SZ · 医疗保健</div></td>
+          <td class="num">3,500</td>
+          <td class="num">10.08</td>
+          <td class="num" style="color:#E60012">10.08</td>
+          <td class="num">35,280</td>
+          <td class="num" style="color:#7A8A9B">+0</td>
+          <td class="num" style="color:#7A8A9B">+0.00%</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">1</td>
+        </tr><tr class="total-row"><td>合计 (15只)</td><td>—</td><td>—</td><td>—</td>
+      <td class="num">1,909,921</td>
+      <td class="num" style="color:#3FB34D">-33,627</td>
+      <td colspan="4"></td></tr></tbody>
+    </table>
+  </div>
+  <div class="card"><div class="note">
+    市值合计 ¥1,909,921 · 现金 ¥47,820 · 总资产 ¥1,957,741 (-2.11%)<br>
+    涨红跌绿 (A股惯例) · 止损/目标价来自买入时三件套设置, 无设置显示 —
+  </div></div>
+
+  </div>
+  <div class="foot">司仓 · 模拟盘仅供研究验证 · 非真实交易 · 投资有风险 入市需谨慎</div>
+  <div class="tabbar"><a href="index.html">资产总览</a><a href="positions.html">持仓明细</a><a href="trades.html">交割单</a></div>
+  <script>
+  // 移动端底部安全区 + 当前页高亮(静态降级)
+  var cur = location.pathname.split('/').pop() || 'index.html';
+  var links = document.querySelectorAll('.tabbar a');
+  for (var i=0;i<links.length;i++){
+    if (links[i].getAttribute('href') === cur) links[i].className = 'on';
+  }
+  </script>
+</div>
+</body>
+</html>
