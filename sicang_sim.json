@@ -1,8 +1,8 @@
 {
-  "asof": "2026-09-01 15:35",
+  "asof": "2026-09-02 15:35",
   "source": "stock.db 收盘价",
-  "total": 1901163.91,
-  "cash": 1185310.91,
+  "total": 1906624.47,
+  "cash": 1317013.47,
   "positions": [
     {
       "code": "000783.SZ",
@@ -10,13 +10,13 @@
       "industry": "证券",
       "shares": 22100,
       "cost": 8.96,
-      "price": 9.25,
-      "pct": 0.4343,
-      "mv": 204425.0,
-      "profit": 6408.999999999981,
-      "profit_pct": 3.2366071428571397,
+      "price": 9.21,
+      "pct": -0.4324,
+      "mv": 203541.00000000003,
+      "profit": 5525.0,
+      "profit_pct": 2.790178571428581,
       "buy_date": "20260805",
-      "hold_days": 26,
+      "hold_days": 27,
       "stop_price": 8.55,
       "target_price": 9.5
     },
@@ -26,13 +26,13 @@
       "industry": "旅游服务",
       "shares": 41400,
       "cost": 4.82,
-      "price": 4.58,
-      "pct": -4.5833,
-      "mv": 189612.0,
-      "profit": -9936.00000000001,
-      "profit_pct": -4.9792531120331995,
+      "price": 4.85,
+      "pct": 5.8952,
+      "mv": 200789.99999999997,
+      "profit": 1241.9999999999736,
+      "profit_pct": 0.6224066390041472,
       "buy_date": "20260805",
-      "hold_days": 26,
+      "hold_days": 27,
       "stop_price": 4.5,
       "target_price": 5.2
     },
@@ -42,34 +42,18 @@
       "industry": "化学制药",
       "shares": 1200,
       "cost": 164.25,
-      "price": 154.78,
-      "pct": -1.6645,
-      "mv": 185736.0,
-      "profit": -11363.999999999998,
-      "profit_pct": -5.765601217656013,
+      "price": 154.4,
+      "pct": -0.2455,
+      "mv": 185280.0,
+      "profit": -11819.999999999993,
+      "profit_pct": -5.996955859969555,
       "buy_date": "20260811",
-      "hold_days": 20,
+      "hold_days": 21,
       "stop_price": 150.0,
       "target_price": 180.0
-    },
-    {
-      "code": "688278.SH",
-      "name": "特宝生物",
-      "industry": "生物制药",
-      "shares": 2400,
-      "cost": 60.75,
-      "price": 56.7,
-      "pct": -2.911,
-      "mv": 136080.0,
-      "profit": -9719.999999999993,
-      "profit_pct": -6.666666666666665,
-      "buy_date": "20260811",
-      "hold_days": 20,
-      "stop_price": 56.0,
-      "target_price": 68.0
     }
   ],
-  "trade_count": 45,
+  "trade_count": 46,
   "trend": [
     {
       "label": "08/05",
@@ -170,6 +154,11 @@
       "label": "09/01",
       "value": 1911193.91,
       "date": "20260901"
+    },
+    {
+      "label": "09/02",
+      "value": 1899169.47,
+      "date": "20260902"
     }
   ]
 }
