@@ -1,22 +1,54 @@
 {
-  "asof": "2026-09-08 15:35",
+  "asof": "2026-09-09 15:35",
   "source": "stock.db 收盘价",
-  "total": 1919556.59,
-  "cash": 1535430.59,
+  "total": 1923552.09,
+  "cash": 980267.09,
   "positions": [
+    {
+      "code": "600487.SH",
+      "name": "亨通光电",
+      "industry": "通信设备",
+      "shares": 4400,
+      "cost": 63.11,
+      "price": 63.11,
+      "pct": -1.3906,
+      "mv": 277684.0,
+      "profit": 0.0,
+      "profit_pct": 0.0,
+      "buy_date": "20260908",
+      "hold_days": 0,
+      "stop_price": 58.0,
+      "target_price": 72.6
+    },
+    {
+      "code": "600176.SH",
+      "name": "中国巨石",
+      "industry": "玻璃",
+      "shares": 6700,
+      "cost": 41.39,
+      "price": 41.39,
+      "pct": -0.7434,
+      "mv": 277313.0,
+      "profit": 0.0,
+      "profit_pct": 0.0,
+      "buy_date": "20260908",
+      "hold_days": 0,
+      "stop_price": 38.0,
+      "target_price": 46.5
+    },
     {
       "code": "000783.SZ",
       "name": "长江证券",
       "industry": "证券",
       "shares": 22100,
       "cost": 8.96,
-      "price": 9.06,
-      "pct": -2.1598,
-      "mv": 200226.0,
-      "profit": 2209.9999999999923,
-      "profit_pct": 1.116071428571419,
+      "price": 9.08,
+      "pct": 0.2208,
+      "mv": 200668.0,
+      "profit": 2651.9999999999827,
+      "profit_pct": 1.3392857142856984,
       "buy_date": "20260805",
-      "hold_days": 33,
+      "hold_days": 34,
       "stop_price": 8.55,
       "target_price": 9.5
     },
@@ -26,18 +58,18 @@
       "industry": "化学制药",
       "shares": 1200,
       "cost": 164.25,
-      "price": 153.25,
-      "pct": -0.377,
-      "mv": 183900.0,
-      "profit": -13200.0,
-      "profit_pct": -6.69710806697108,
+      "price": 156.35,
+      "pct": 2.0228,
+      "mv": 187620.0,
+      "profit": -9480.000000000007,
+      "profit_pct": -4.809741248097421,
       "buy_date": "20260811",
-      "hold_days": 27,
+      "hold_days": 28,
       "stop_price": 150.0,
       "target_price": 180.0
     }
   ],
-  "trade_count": 47,
+  "trade_count": 49,
   "trend": [
     {
       "label": "08/05",
@@ -163,6 +195,11 @@
       "label": "09/08",
       "value": 1923718.59,
       "date": "20260908"
+    },
+    {
+      "label": "09/09",
+      "value": 1945145.09,
+      "date": "20260909"
     }
   ]
 }
