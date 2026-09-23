@@ -1,43 +1,27 @@
 {
-  "asof": "2026-09-22 15:41",
+  "asof": "2026-09-23 15:41",
   "source": "stock.db 收盘价",
-  "total": 1999827.92,
-  "cash": 1482575.92,
+  "total": 2004938.96,
+  "cash": 1803518.96,
   "positions": [
-    {
-      "code": "600487.SH",
-      "name": "亨通光电",
-      "industry": "通信设备",
-      "shares": 4400,
-      "cost": 63.11,
-      "price": 71.75,
-      "pct": 3.2523,
-      "mv": 315700.0,
-      "profit": 38016.0,
-      "profit_pct": 13.690381872920309,
-      "buy_date": "20260908",
-      "hold_days": 13,
-      "stop_price": 58.0,
-      "target_price": 72.6
-    },
     {
       "code": "603259.SH",
       "name": "药明康德",
       "industry": "化学制药",
       "shares": 1200,
       "cost": 164.25,
-      "price": 167.96,
-      "pct": 4.975,
-      "mv": 201552.0,
-      "profit": 4452.000000000009,
-      "profit_pct": 2.2587519025875302,
+      "price": 167.85,
+      "pct": -0.0655,
+      "mv": 201420.0,
+      "profit": 4319.999999999993,
+      "profit_pct": 2.191780821917799,
       "buy_date": "20260811",
-      "hold_days": 41,
+      "hold_days": 42,
       "stop_price": 150.0,
       "target_price": 180.0
     }
   ],
-  "trade_count": 51,
+  "trade_count": 52,
   "trend": [
     {
       "label": "08/05",
@@ -193,6 +177,11 @@
       "label": "09/18",
       "value": 1980331.92,
       "date": "20260918"
+    },
+    {
+      "label": "09/22",
+      "value": 2004938.96,
+      "date": "20260922"
     }
   ]
 }
